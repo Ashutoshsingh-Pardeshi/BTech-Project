@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.css";
 import ParkedVehicles from "./components/ParkedVehicles";
 import ViewDetails from "./components/ViewDetails";
+import PaymentDetails from "./components/PaymentDetails";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Navbar />
       <ParkedVehicles />
       <ViewDetails />
+      <PaymentDetails />
     </>
   );
 }
