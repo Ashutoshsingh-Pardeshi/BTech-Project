@@ -4,17 +4,24 @@ import backgroundImage2 from "../assets/bg-copy.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { OwnerSchema } from "./OwnerInterface";
+import { ParkingSchema } from "./ParkingInterface";
 
 const ViewDetails = () => {
   // const { params } = props.match;
   const { id } = useParams();
   const navigate = useNavigate();
   const [user, setUser] = useState<OwnerSchema>();
+  const [parking, setParking] = useState<ParkingSchema>();
 
   useEffect(() => {
     axios.get(`http://localhost:3000/api/owners/${id}`).then((res) => {
-      console.log(res.data);
+      console.log("owner: ", res.data);
       setUser(res.data);
+    });
+
+    axios.get(`http://localhost:3000/api/parkings/${id}`).then((res) => {
+      console.log("parking: ", res.data);
+      setParking(res.data);
     });
   }, []);
 
@@ -41,7 +48,7 @@ const ViewDetails = () => {
             </div>
             <div className="col-8">
               {/* Owner Details */}
-              <div className="card mb-2">
+              <div className="card mb-2 bg-info bg-opacity-50">
                 <figure className="text-center">
                   <h1 className="display-6 pt-2">Owner Details</h1>
                 </figure>
@@ -104,7 +111,7 @@ const ViewDetails = () => {
               </div>
 
               {/* Vehicle Details */}
-              <div className="card my-2">
+              <div className="card my-2 bg-info bg-opacity-50">
                 <figure className="text-center">
                   <h1 className="display-6 pt-2">Vehicle Details</h1>
                 </figure>
@@ -148,7 +155,7 @@ const ViewDetails = () => {
               </div>
 
               {/* Parking Details */}
-              <div className="card my-2">
+              <div className="card my-2 bg-info bg-opacity-50">
                 <figure className="text-center">
                   <h1 className="display-6 pt-2">Parking Details</h1>
                 </figure>
@@ -160,10 +167,8 @@ const ViewDetails = () => {
                     </div>
                     <div className="col-3">
                       <p className="h6">
-                        {user &&
-                          new Date(
-                            user.parkingDetails.checkIn
-                          ).toLocaleTimeString("en-US")}
+                        {parking &&
+                          new Date(parking.checkIn).toLocaleTimeString("en-US")}
                       </p>
                     </div>
 
@@ -171,24 +176,20 @@ const ViewDetails = () => {
                       <p className="h6">Parked Spot : </p>
                     </div>
                     <div className="col-3">
-                      <p className="h6">
-                        {user && user.parkingDetails.parkedSpot}{" "}
-                      </p>
+                      <p className="h6">{parking && parking.parkingSpot} </p>
                     </div>
 
-                    <div className="col-5"></div>
-                    <div className="col-4">
+                    <div className="d-flex justify-content-center mt-4 mb-0">
                       <button
                         type="button"
-                        className="btn btn-warning"
+                        className="btn btn-warning px-4 py-2"
                         onClick={() => {
                           navigate(`/check-out/${user && user._id}`);
                         }}
                       >
-                        Check Out
+                        <span className="h5">Check Out</span>
                       </button>
                     </div>
-                    <div className="col-4"></div>
                   </div>
                 </div>
               </div>
@@ -201,7 +202,7 @@ const ViewDetails = () => {
                     navigate("/parked-vehicles");
                   }}
                 >
-                  Go back
+                  <span className="h5">Go Back</span>
                 </button>
               </div>
             </div>
