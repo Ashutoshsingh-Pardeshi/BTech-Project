@@ -182,7 +182,7 @@ const ViewDetails = () => {
                         type="button"
                         className="btn btn-warning"
                         onClick={() => {
-                          navigate("/check-out");
+                          navigate(`/check-out/${user && user._id}`);
                         }}
                       >
                         Check Out
