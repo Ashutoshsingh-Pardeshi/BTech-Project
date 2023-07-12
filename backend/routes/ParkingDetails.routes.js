@@ -23,6 +23,15 @@ router.get("/parkedSpots", (req, res) => {
   });
 });
 
+router.get("/:ownerId", (req, res) => {
+  const { ownerId } = req.params;
+
+  ParkingDetails.findOne({ ownerId }).then((spot) => {
+    res.status(200);
+    res.send(spot);
+  });
+});
+
 router.post("/addSpot/:parkingSpot", (req, res) => {
   const { parkingSpot } = req.params;
   try {
