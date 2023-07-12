@@ -16,6 +16,13 @@ router.get("/availableSpots", (req, res) => {
   });
 });
 
+router.get("/parkedSpots", (req, res) => {
+  ParkingDetails.find({ isOccupied: true }).then((spots) => {
+    res.status(200);
+    res.send(spots);
+  });
+});
+
 router.post("/addSpot/:parkingSpot", (req, res) => {
   const { parkingSpot } = req.params;
   try {
