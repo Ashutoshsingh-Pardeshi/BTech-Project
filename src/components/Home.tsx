@@ -49,7 +49,7 @@ const Home = () => {
               type="button"
               className="btn btn-warning pt-3 pb-4"
               onClick={() => {
-                navigate("/parked-vehicles");
+                navigate("/add-vehicle");
               }}
             >
               <span className="display-6 p-5">Add new vehicle</span>
