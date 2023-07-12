@@ -1,16 +1,17 @@
 const mongoose = require("mongoose");
 const timestampsPlugin = require("mongoose-timestamp");
 const VehicleSchema = require("./Vehicle.model");
+const ParkingSchema = require("./ParkingDetails.model");
 
 const OwnerSchema = new mongoose.Schema({
   ownerName: {
     type: String,
-    // require: true,
+    require: true,
     trim: true,
   },
   contactNumber: {
     type: Number,
-    // require: true,
+    require: true,
     trim: true,
   },
   DOB: {
@@ -18,26 +19,30 @@ const OwnerSchema = new mongoose.Schema({
   },
   fullAddress: {
     type: String,
-    // require: true,
+    require: true,
     trim: true,
   },
   city: {
     type: String,
-    // require: true,
+    require: true,
     trim: true,
   },
   state: {
     type: String,
-    // require: true,
+    require: true,
     trim: true,
   },
   pinCode: {
     type: Number,
-    // require: true,
+    require: true,
     trim: true,
   },
   vehicle: {
     type: VehicleSchema,
+    require: true,
+  },
+  parkingDetails: {
+    type: ParkingSchema,
     require: true,
   },
 }).plugin(timestampsPlugin);
