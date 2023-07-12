@@ -9,8 +9,8 @@ router.get("", (req, res) => {
   });
 });
 
-router.get("/availableSpots", (req, res) => {
-  ParkingDetails.find({ isOccupied: false }, "parkingSpot").then((spots) => {
+router.get("/availableSpot", (req, res) => {
+  ParkingDetails.findOne({ isOccupied: false }, "parkingSpot").then((spots) => {
     res.status(200);
     res.send(spots);
   });
