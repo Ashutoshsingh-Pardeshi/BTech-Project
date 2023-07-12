@@ -6,11 +6,7 @@ export interface OwnerSchema {
   fullAddress: String;
   city: String;
   state: String;
-  pinCode: {
-    type: Number;
-    require: true;
-    trim: true;
-  };
+  pinCode: Number;
   vehicle: {
     licenseNumber: String;
     engineNumber: String;
