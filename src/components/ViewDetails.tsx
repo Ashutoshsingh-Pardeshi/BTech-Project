@@ -14,15 +14,25 @@ const ViewDetails = () => {
   const [parking, setParking] = useState<ParkingSchema>();
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/api/owners/${id}`).then((res) => {
-      console.log("owner: ", res.data);
-      setUser(res.data);
-    });
+    axios
+      .get(`http://localhost:3000/api/owners/${id}`)
+      .then((res) => {
+        console.log("owner: ", res.data);
+        setUser(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-    axios.get(`http://localhost:3000/api/parkings/${id}`).then((res) => {
-      console.log("parking: ", res.data);
-      setParking(res.data);
-    });
+    axios
+      .get(`http://localhost:3000/api/parkings/${id}`)
+      .then((res) => {
+        console.log("parking: ", res.data);
+        setParking(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (
