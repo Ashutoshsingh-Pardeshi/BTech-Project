@@ -36,14 +36,12 @@ const Navbar = () => {
             <Link className="nav-link" to="/parked-vehicles">
               View All
             </Link>
-            <Link className="nav-link" to="/parking-details">
+            <Link className="nav-link" to="/add-vehicle">
               Add New Entry
             </Link>
-            <Link className="nav-link" to="/check-out">
+            <Link className="nav-link" to="/">
               Pricing Details
             </Link>
-            <a className="nav-link" href="add-new"></a>
-            <a className="nav-link" href="pricing"></a>
           </div>
         </div>
       </div>
