@@ -1,54 +1,95 @@
 import { AiOutlineFileDone } from "react-icons/ai";
 import Navbar from "./Navbar";
-import { useNavigate } from "react-router-dom";
+import backgroundImage2 from "../assets/bg-copy.png";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { OwnerSchema } from "./OwnerInterface";
 
 const PaymentDetails = () => {
   const navigate = useNavigate();
-  const checkOutTime = new Date().toLocaleTimeString("en-US");
+  const checkOut = new Date();
+  const [user, setUser] = useState<OwnerSchema>();
+  const [parkingCharge, setParkingCharge] = useState("0");
+  const { id } = useParams();
+
+  useEffect(() => {
+    axios.get(`http://localhost:3000/api/owners/${id}`).then((res) => {
+      {
+        setUser(res.data);
+        const checkIn = new Date(res.data.parkingDetails.checkIn);
+        const duration = (checkOut.getTime() - checkIn.getTime()) / 60000;
+        if (duration <= 30) {
+          setParkingCharge(duration.toFixed(2));
+        } else if (duration <= 120) {
+          setParkingCharge((duration * 0.7).toFixed(2));
+        } else {
+          setParkingCharge(((duration / 60) * 20).toFixed(2));
+        }
+        console.log(res.data);
+        console.log(duration.toFixed(2));
+      }
+    });
+  }, []);
 
   return (
     <>
-      <Navbar />
+      <div
+        style={{
+          backgroundImage: `url(${backgroundImage2})`,
+          backgroundSize: "cover",
+          height: "100vh",
+        }}
+      >
+        <Navbar />
 
-      <div className="alert alert-success mx-5 mt-3">
-        {/* {setTimeout(() => {
+        <div className="alert bg-info bg-opacity-50  border mx-5 mt-3">
+          {/* {setTimeout(() => {
         <> */}
-        <h4 className="alert-heading">
-          <AiOutlineFileDone size={30} className="me-2" />
-          Checked out successfully !
-        </h4>
-        <p>
-          Vehicle number MH 12 DE 1234 has checked out successfully. The ticket
-          cost is{" "}
-          <span className="badge rounded-pill bg-success">₹ 10.3/-</span>
-        </p>
-        <hr />
+          <h4 className="alert-heading text-success">
+            <AiOutlineFileDone size={30} className="me-2" />
+            Checked out successfully !
+          </h4>
+          <p>
+            Vehicle number {user && user.vehicle.licenseNumber} has checked out
+            successfully. The ticket cost is{" "}
+            <span className="badge rounded-pill bg-success">
+              ₹ {parkingCharge}/-
+            </span>
+          </p>
+          <hr />
 
-        <h4>Parking Details</h4>
-        <div className="row">
-          <div className="col-2"> Check In Time : </div>
-          <div className="col-9"> 1:00 pm </div>
+          <h4>Parking Details</h4>
+          <div className="row">
+            <div className="col-2"> Check In Time : </div>
+            <div className="col-9">
+              {user &&
+                new Date(user.parkingDetails.checkIn).toLocaleTimeString(
+                  "en-US"
+                )}
+            </div>
 
-          <div className="col-2"> Check Out Time : </div>
-          <div className="col-9"> {checkOutTime} </div>
+            <div className="col-2"> Check Out Time : </div>
+            <div className="col-9">{checkOut.toLocaleTimeString("en-US")} </div>
 
-          <div className="col-2"> Parked Spot : </div>
-          <div className="col-9"> A9 </div>
+            <div className="col-2"> Parked Spot : </div>
+            <div className="col-9">
+              {user && user.parkingDetails.parkedSpot}
+            </div>
+          </div>
+
+          <div className="d-flex justify-content-center">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Go to Home
+            </button>
+          </div>
         </div>
-
-        <div className="d-flex justify-content-center">
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Go to Home
-          </button>
-        </div>
-        {/* </>;
-      }, 5000)} */}
       </div>
     </>
   );
