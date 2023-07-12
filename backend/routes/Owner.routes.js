@@ -1,6 +1,5 @@
 const express = require("express");
 const Owner = require("../models/Owner.model");
-const ParkingDetails = require("../models/ParkingDetails.model");
 const router = express.Router();
 
 /**
@@ -51,7 +50,6 @@ router.post("", (req, res) => {
     registrationDate,
     color,
     seatingCapacity,
-    parkedSpot,
   } = req.body;
 
   try {
@@ -70,10 +68,6 @@ router.post("", (req, res) => {
         registrationDate,
         color,
         seatingCapacity,
-      },
-      parkingDetails: {
-        checkIn: new Date(),
-        parkedSpot,
       },
     })
       .save()

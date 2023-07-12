@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const timestampsPlugin = require("mongoose-timestamp");
 const VehicleSchema = require("./Vehicle.model");
-const ParkingSchema = require("./ParkingDetails.model");
 
 const OwnerSchema = new mongoose.Schema({
   ownerName: {
@@ -39,10 +38,6 @@ const OwnerSchema = new mongoose.Schema({
   },
   vehicle: {
     type: VehicleSchema,
-    require: true,
-  },
-  parkingDetails: {
-    type: ParkingSchema,
     require: true,
   },
 }).plugin(timestampsPlugin);

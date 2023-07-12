@@ -1,14 +1,18 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const owners = require("./routes/Owner.routes");
+const parkings = require("./routes/ParkingDetails.routes");
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/owners", owners);
+app.use("/api/parkings", parkings);
 
 app.listen(3000, () => {
   console.log("Listening on PORT 3000 ...");
