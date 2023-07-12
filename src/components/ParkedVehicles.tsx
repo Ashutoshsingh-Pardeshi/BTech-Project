@@ -4,15 +4,22 @@ import backgroundImage2 from "../assets/bg-copy.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { OwnerSchema } from "./OwnerInterface";
+import { ParkingSchema } from "./ParkingInterface";
 
 const ParkedVehicles = () => {
   const [users, setUsers] = useState<OwnerSchema[]>([]);
+  const [parkingSpots, setParkingSpots] = useState<ParkingSchema[]>([]);
   const [time, setTime] = useState(new Date().toLocaleTimeString("en-US"));
 
   useEffect(() => {
     axios.get("http://localhost:3000/api/owners").then((res) => {
-      console.log(res.data);
+      console.log("user : ", res.data);
       setUsers(res.data);
+    });
+
+    axios.get("http://localhost:3000/api/parkings/parkedSpots").then((res) => {
+      console.log("parkings : ", res.data);
+      setParkingSpots(res.data);
     });
   }, []);
 
@@ -21,7 +28,18 @@ const ParkedVehicles = () => {
       setTime(new Date().toLocaleTimeString("en-US"));
     });
   });
+
   const navigate = useNavigate();
+
+  const getParkingSpot = (ownerId: String) => {
+    const spot = parkingSpots.find((spot) => spot.ownerId === ownerId);
+    return spot?.parkingSpot;
+  };
+
+  const getCheckIn = (ownerId: String) => {
+    const spot = parkingSpots.find((spot) => spot.ownerId === ownerId);
+    return spot?.checkIn || new Date();
+  };
   return (
     <>
       <div
@@ -66,11 +84,11 @@ const ParkedVehicles = () => {
                     <td>vehicle.image</td>
                     <td>{vehicle.vehicle.licenseNumber}</td>
                     <td>
-                      {new Date(
-                        vehicle.parkingDetails.checkIn
-                      ).toLocaleTimeString("en-US")}
+                      {new Date(getCheckIn(vehicle._id)).toLocaleTimeString(
+                        "en-US"
+                      )}
                     </td>
-                    <td>{vehicle.parkingDetails.parkedSpot}</td>
+                    <td>{getParkingSpot(vehicle._id)}</td>
                     <td>
                       <button
                         type="button"
