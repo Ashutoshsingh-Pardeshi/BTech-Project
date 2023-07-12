@@ -8,7 +8,7 @@ const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   { path: "/parked-vehicles", element: <ParkedVehicles /> },
   { path: "/parking-details/:id", element: <ViewDetails /> },
-  { path: "/check-out", element: <PaymentDetails /> },
+  { path: "/check-out/:id", element: <PaymentDetails /> },
 ]);
 
 export default router;
