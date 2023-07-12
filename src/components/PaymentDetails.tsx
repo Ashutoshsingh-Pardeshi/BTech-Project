@@ -60,22 +60,16 @@ const PaymentDetails = () => {
           <hr />
 
           <h4>Parking Details</h4>
-          <div className="row">
-            <div className="col-2"> Check In Time : </div>
-            <div className="col-9">
+          <div>
+            <div>
+              Check In Time :{" "}
               {user &&
                 new Date(user.parkingDetails.checkIn).toLocaleTimeString(
                   "en-US"
                 )}
             </div>
-
-            <div className="col-2"> Check Out Time : </div>
-            <div className="col-9">{checkOut.toLocaleTimeString("en-US")} </div>
-
-            <div className="col-2"> Parked Spot : </div>
-            <div className="col-9">
-              {user && user.parkingDetails.parkedSpot}
-            </div>
+            <div> Check Out Time : {checkOut.toLocaleTimeString("en-US")}</div>
+            <div> Parked Spot : {user && user.parkingDetails.parkedSpot}</div>
           </div>
 
           <div className="d-flex justify-content-center">
