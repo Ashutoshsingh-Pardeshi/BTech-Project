@@ -3,15 +3,6 @@ const mongoose = require("mongoose");
 const timestampsPlugin = require("mongoose-timestamp");
 
 const ParkingSchema = new mongoose.Schema({
-  ownerId: {
-    type: ObjectId,
-    require: true,
-  },
-  licenseNumber: {
-    type: String,
-    require: true,
-    trim: true,
-  },
   checkIn: {
     type: Date,
     require: true,
@@ -24,6 +15,6 @@ const ParkingSchema = new mongoose.Schema({
   },
 });
 
-const ParkingDetails = mongoose.model("ParkingDetails", ParkingSchema);
+// const ParkingDetails = mongoose.model("ParkingDetails", ParkingSchema);
 
-module.exports = ParkingDetails;
+module.exports = ParkingSchema;
