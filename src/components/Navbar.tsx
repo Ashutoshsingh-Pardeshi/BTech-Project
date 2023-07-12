@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { LuParkingSquare } from "react-icons/lu";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [expanded, setExpanded] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleToggle = () => {
     setExpanded(!expanded);
@@ -14,8 +17,15 @@ const Navbar = () => {
       //   style={{ color: "white", backgroundColor: "green" }}
     >
       <div className="container-fluid">
-        <LuParkingSquare size={28} className="mx-1" />
-        Parking System
+        <span
+          className="nav-link"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          <LuParkingSquare size={28} className="mx-1" />
+          Parking System
+        </span>
         <button className="navbar-toggler" type="button" onClick={handleToggle}>
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -23,15 +33,17 @@ const Navbar = () => {
           className={"ps-3 navbar-collapse " + (expanded ? "show" : "collapse")}
         >
           <div className="navbar-nav">
-            <a className="nav-link" aria-current="page" href="#">
+            <Link className="nav-link" to="/parked-vehicles">
               View All
-            </a>
-            <a className="nav-link" href="#">
+            </Link>
+            <Link className="nav-link" to="/parking-details">
               Add New Entry
-            </a>
-            <a className="nav-link" href="#">
+            </Link>
+            <Link className="nav-link" to="/check-out">
               Pricing Details
-            </a>
+            </Link>
+            <a className="nav-link" href="add-new"></a>
+            <a className="nav-link" href="pricing"></a>
           </div>
         </div>
       </div>

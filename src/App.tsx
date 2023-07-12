@@ -1,18 +1,16 @@
 import "./App.css";
-import Home from "./components/Home";
-import Navbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.css";
-import ParkedVehicles from "./components/ParkedVehicles";
-import ViewDetails from "./components/ViewDetails";
-import PaymentDetails from "./components/PaymentDetails";
+import { RouterProvider } from "react-router-dom";
+import router from "./components/router";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <ParkedVehicles />
-      <ViewDetails />
-      <PaymentDetails />
+      {/* <Navbar /> */}
+      <RouterProvider router={router} />
+      {/* <ParkedVehicles />
+       <ViewDetails />
+       <PaymentDetails /> */}
     </>
   );
 }

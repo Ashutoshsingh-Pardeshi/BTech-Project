@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
+
 const ParkedVehicles = () => {
   const data = [
     {
@@ -141,47 +144,58 @@ const ParkedVehicles = () => {
       parkedLocation: "A9",
     },
   ];
+  const navigate = useNavigate();
   return (
-    <div className="container mt-3">
-      <table className="table">
-        <thead>
-          <tr style={{ backgroundColor: "red" }}>
-            <th className="bg-info-subtle" scope="col">
-              Entry Id
-            </th>
-            <th className="bg-info-subtle" scope="col">
-              Image
-            </th>
-            <th className="bg-info-subtle" scope="col">
-              License Number
-            </th>
-            <th className="bg-info-subtle" scope="col">
-              Entry Time
-            </th>
-            <th className="bg-info-subtle" scope="col">
-              Parked Location
-            </th>
-            <th className="bg-info-subtle" scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((vehicle) => (
-            <tr key={vehicle.id}>
-              <th scope="row">{vehicle.id}</th>
-              <td>{vehicle.image}</td>
-              <td>{vehicle.licenseNumber}</td>
-              <td>{vehicle.entryTime}</td>
-              <td>{vehicle.parkedLocation}</td>
-              <td>
-                <button type="button" className="btn btn-info">
-                  View Details
-                </button>
-              </td>
+    <>
+      <Navbar />
+
+      <div className="container mt-3">
+        <table className="table">
+          <thead>
+            <tr style={{ backgroundColor: "red" }}>
+              <th className="bg-info-subtle" scope="col">
+                Entry Id
+              </th>
+              <th className="bg-info-subtle" scope="col">
+                Image
+              </th>
+              <th className="bg-info-subtle" scope="col">
+                License Number
+              </th>
+              <th className="bg-info-subtle" scope="col">
+                Entry Time
+              </th>
+              <th className="bg-info-subtle" scope="col">
+                Parked Location
+              </th>
+              <th className="bg-info-subtle" scope="col"></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {data.map((vehicle) => (
+              <tr key={vehicle.id}>
+                <th scope="row">{vehicle.id}</th>
+                <td>{vehicle.image}</td>
+                <td>{vehicle.licenseNumber}</td>
+                <td>{vehicle.entryTime}</td>
+                <td>{vehicle.parkedLocation}</td>
+                <td>
+                  <button
+                    type="button"
+                    className="btn btn-info"
+                    onClick={() => {
+                      navigate("/parking-details");
+                    }}
+                  >
+                    View Details
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 
