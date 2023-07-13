@@ -172,7 +172,7 @@ const AddVehicle = () => {
             onSubmit={handleSubmit(
               (data) => {
                 onSubmit(data);
-                // reset();
+                reset();
               },
               (err) => {
                 onInvalid(err);
