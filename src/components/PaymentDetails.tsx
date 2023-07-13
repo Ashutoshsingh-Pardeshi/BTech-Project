@@ -57,8 +57,6 @@ const PaymentDetails = () => {
         <Navbar />
 
         <div className="alert bg-info bg-opacity-50  border mx-5 mt-3">
-          {/* {setTimeout(() => {
-        <> */}
           <h4 className="alert-heading text-success">
             <AiOutlineFileDone size={30} className="me-2" />
             Checked out successfully !

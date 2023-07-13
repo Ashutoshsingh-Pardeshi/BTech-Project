@@ -178,25 +178,7 @@ const AddVehicle = () => {
                 onInvalid(err);
               }
             )}
-            // onInvalid={() => {
-            //   console.log("Errors");
-            //   // console.log(err);
-            //   console.log(errors);
-            // }}
           >
-            {/* <div className="input-group">
-                <span className="input-group-text" id="basic-addon1">
-                  ₹
-                </span>
-                <input
-                  {...register("amount", { valueAsNumber: true })}
-                  type="number"
-                  id="amount"
-                  className="form-control"
-                  // placeholder="Enter the amount of the item bought"
-                />
-              </div> */}
-
             {/* Owner Details */}
             <div className="mb-4">
               <label htmlFor="ownerName" className="form-label h4">
