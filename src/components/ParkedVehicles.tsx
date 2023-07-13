@@ -61,7 +61,7 @@ const ParkedVehicles = () => {
       >
         <Navbar />
 
-        <div className="container mt-3">
+        <div className="container mt-5">
           <div className="badge bg-info bg-opacity-75">
             <p className="display-6 px-2 pt-2">{time}</p>
           </div>
@@ -114,6 +114,18 @@ const ParkedVehicles = () => {
                 ))}
             </tbody>
           </table>
+
+          <div className="d-flex justify-content-center my-3">
+            <button
+              type="button"
+              className="btn btn-primary py-2"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              <span className="h3 px-3">Go Back</span>
+            </button>
+          </div>
         </div>
       </div>
     </>

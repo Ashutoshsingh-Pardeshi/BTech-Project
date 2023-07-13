@@ -25,6 +25,17 @@ router.get("/availableSpot", (req, res) => {
 });
 
 /**
+ * @route GET /api/parkings/availableSpots
+ * @desc Get all free parking spot
+ */
+router.get("/availableSpots", (req, res) => {
+  ParkingDetails.find({ isOccupied: false }, "parkingSpot").then((spots) => {
+    res.status(200);
+    res.send(spots);
+  });
+});
+
+/**
  * @route GET /api/parkings/parkedSpots
  * @desc Gets only the occupied parking spots
  */

@@ -2,11 +2,14 @@ import Navbar from "./Navbar";
 import backgroundImage2 from "../assets/bg-copy.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ParkingSchema } from "./ParkingInterface";
+import axios from "axios";
 
 const Home = () => {
   const [date, setDate] = useState(new Date().toDateString());
   const [time, setTime] = useState(new Date().toLocaleTimeString("en-US"));
 
+  const [parkingSpots, setParkingSpots] = useState<ParkingSchema[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,6 +18,16 @@ const Home = () => {
         setTime(new Date().toLocaleTimeString("en-US"));
     });
   });
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/parkings/availableSpots")
+      .then((res) => {
+        console.log(res.data);
+        setParkingSpots(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <>
       <div
@@ -45,17 +58,27 @@ const Home = () => {
             >
               <span className="display-6 p-3">View parked vehicles</span>
             </button>
-            <button
-              type="button"
-              className="btn btn-warning pt-3 pb-4"
-              onClick={() => {
-                navigate("/add-vehicle");
-              }}
-            >
-              <span className="display-6 p-5">Add new vehicle</span>
-            </button>
+            {parkingSpots && parkingSpots.length && (
+              <button
+                type="button"
+                className={
+                  "pt-3 pb-4 btn btn-" +
+                  (parkingSpots && parkingSpots.length > 1
+                    ? "warning"
+                    : "danger")
+                }
+                onClick={() => {
+                  navigate("/add-vehicle");
+                }}
+              >
+                <span className="display-6 p-5">
+                  {parkingSpots && parkingSpots.length > 1
+                    ? "Add new vehicle"
+                    : "Only 1 spot left"}
+                </span>
+              </button>
+            )}
           </div>
-          {/* </div> */}
         </div>
       </div>
     </>
