@@ -3,8 +3,8 @@ import Navbar from "./Navbar";
 import backgroundImage2 from "../assets/bg-copy.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { OwnerSchema } from "./OwnerInterface";
-import { ParkingSchema } from "./ParkingInterface";
+import { OwnerSchema } from "../assets/common/OwnerInterface";
+import { ParkingSchema } from "../assets/common/ParkingInterface";
 
 const ViewDetails = () => {
   // const { params } = props.match;

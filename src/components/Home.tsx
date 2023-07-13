@@ -2,7 +2,7 @@ import Navbar from "./Navbar";
 import backgroundImage2 from "../assets/bg-copy.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ParkingSchema } from "./ParkingInterface";
+import { ParkingSchema } from "../assets/common/ParkingInterface";
 import axios from "axios";
 
 const Home = () => {

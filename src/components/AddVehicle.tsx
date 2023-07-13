@@ -4,8 +4,8 @@ import { FieldErrors, FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import preloadedData from "../assets/common/PrefilledData";
 
 const FormSchema = z.object({
   ownerName: z
@@ -85,16 +85,31 @@ const onInvalid = (err: FieldErrors) => {
 export type FormData = z.infer<typeof FormSchema>;
 
 const AddVehicle = () => {
-  const [userId, setUserId] = useState("");
-  const [parkingSpot, setParkingSpot] = useState("");
   const navigate = useNavigate();
 
   const {
     register,
-    reset,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(FormSchema) });
+  } = useForm<FormData>({
+    resolver: zodResolver(FormSchema),
+  });
+
+  const onPreFill = () => {
+    setValue("ownerName", preloadedData.ownerName);
+    setValue("fullAddress", preloadedData.fullAddress);
+    setValue("city", preloadedData.city);
+    setValue("state", preloadedData.state);
+    setValue("pinCode", preloadedData.pinCode);
+    setValue("DOB", preloadedData.DOB);
+    setValue("contactNumber", preloadedData.contactNumber);
+    setValue("registrationDate", preloadedData.registrationDate);
+    setValue("engineNumber", preloadedData.engineNumber);
+    setValue("chasisNumber", preloadedData.chasisNumber);
+    setValue("color", preloadedData.color);
+    setValue("seatingCapacity", preloadedData.seatingCapacity);
+  };
 
   const onSubmit = async (data: FieldValues) => {
     const {
@@ -130,22 +145,25 @@ const AddVehicle = () => {
         seatingCapacity,
       })
       .then((res) => {
-        setUserId(res.data._id);
-        console.log(res.data);
+        getParkingSpot(res.data._id);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  useEffect(() => {
+  const getParkingSpot = (userId: string) => {
     axios
       .get("http://localhost:3000/api/parkings/availableSpot")
       .then((res) => {
-        setParkingSpot(res.data.parkingSpot);
-        console.log("updated parkingSpot: ", parkingSpot);
+        occupyParkingSpot(userId, res.data.parkingSpot);
       })
       .catch((err) => console.log(err));
+  };
+
+  const occupyParkingSpot = (userId: string, parkingSpot: string) => {
+    // console.log("UserId : ", userId);
+    // console.log("updated parkingSpot: ", parkingSpot);
     axios
       .put(`http://localhost:3000/api/parkings/occupy/${userId}/${parkingSpot}`)
       .then((res) => {
@@ -153,7 +171,7 @@ const AddVehicle = () => {
         navigate("/parked-vehicles");
       })
       .catch((err) => console.log(err));
-  }, [userId]);
+  };
 
   return (
     <>
@@ -161,7 +179,6 @@ const AddVehicle = () => {
         style={{
           backgroundImage: `url(${backgroundImage2})`,
           backgroundSize: "cover",
-          // height: "100vh",
         }}
         className="pb-5"
       >
@@ -172,7 +189,6 @@ const AddVehicle = () => {
             onSubmit={handleSubmit(
               (data) => {
                 onSubmit(data);
-                reset();
               },
               (err) => {
                 onInvalid(err);
@@ -447,17 +463,13 @@ const AddVehicle = () => {
 
             <div className="d-flex justify-content-evenly m-3">
               <button
-                // disabled={!isValid}
-                type="submit"
+                type="button"
                 className="btn btn-warning px-4 py-1"
+                onClick={onPreFill}
               >
                 <span className="h2">Fill Data</span>
               </button>
-              <button
-                // disabled={!isValid}
-                type="submit"
-                className="btn btn-success px-4 py-1"
-              >
+              <button type="submit" className="btn btn-success px-4 py-1">
                 <span className="h2">Submit</span>
               </button>
             </div>

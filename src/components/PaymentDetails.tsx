@@ -4,7 +4,7 @@ import backgroundImage2 from "../assets/bg-copy.png";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { ParkingSchema } from "./ParkingInterface";
+import { ParkingSchema } from "../assets/common/ParkingInterface";
 
 const PaymentDetails = () => {
   const navigate = useNavigate();
