@@ -89,7 +89,6 @@ router.post("", (req, res) => {
 router.delete("/:id", (req, res) => {
   const ownerId = req.params.id;
   try {
-    // Owner.findOneAndRemove({ _id: new ObjectId(owner_id) }).then((owner) => {
     Owner.findByIdAndRemove(ownerId).then((owner) => {
       res.status(200);
       res.send(owner);
