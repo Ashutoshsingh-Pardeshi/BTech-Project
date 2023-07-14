@@ -39,7 +39,7 @@ const Navbar = () => {
             <Link className="nav-link" to="/upload-image">
               Add New Entry
             </Link>
-            <Link className="nav-link" to="/">
+            <Link className="nav-link disabled" to="/">
               Pricing Details
             </Link>
           </div>
