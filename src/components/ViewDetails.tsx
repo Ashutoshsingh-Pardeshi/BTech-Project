@@ -48,10 +48,35 @@ const ViewDetails = () => {
 
         <div className="container mt-3">
           <div className="row">
-            <div className="col-4">
+            <div className="d-flex flex-column justify-content-evenly col-4">
               <img
-                src="..."
-                className="rounded float-start"
+                src={
+                  // "/src/assets/images/MHOTAV8866-org.jpeg"
+                  "/src/assets/images/" +
+                  user?.vehicle.licenseNumber +
+                  "-org.jpg"
+                }
+                className="rounded float-start mb-2"
+                alt="Image"
+                style={{ maxHeight: "300px", maxWidth: "300px" }}
+              ></img>
+              <img
+                src={ // "/src/assets/images/MHOTAV8866-bb.jpg"
+                  "/src/assets/images/" +
+                  user?.vehicle.licenseNumber +
+                  "-bb.jpg"
+                }
+                className="rounded float-start my-2"
+                alt="Image"
+                style={{ maxHeight: "300px", maxWidth: "300px" }}
+              ></img>
+              <img
+                src={ // "/src/assets/images/MHOTAV8866-cpd.jpg"
+                  "/src/assets/images/" +
+                  user?.vehicle.licenseNumber +
+                  "-cpd.jpg"
+                }
+                className="rounded float-start mt-2"
                 alt="Image"
                 style={{ maxHeight: "300px", maxWidth: "300px" }}
               ></img>
