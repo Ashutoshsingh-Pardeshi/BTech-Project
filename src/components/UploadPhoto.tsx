@@ -11,6 +11,7 @@ function UploadPhoto() {
   const [orgImage, setOrgImage] = useState("");
   const [bbImage, setBbImage] = useState("");
   const [cpdImage, setCpdImage] = useState("");
+  const [loadImage, setLoadImage] = useState(true);
   const navigate = useNavigate();
 
   const handleChange = async (
@@ -72,6 +73,9 @@ function UploadPhoto() {
     setOrgImage("/src/assets/images/" + licenseNumber + "-org.jpg");
     setBbImage("/src/assets/images/" + licenseNumber + "-bb.jpg");
     setCpdImage("/src/assets/images/" + licenseNumber + "-cpd.jpg");
+    setTimeout(() => {
+      setLoadImage(false);
+    }, 5000);
   };
   return (
     <>
@@ -134,24 +138,46 @@ function UploadPhoto() {
           <div className="container bg-info bg-opacity-50 border rounded borfer-info text-black mt-5 p-3">
             <p className="display-6">ANPR Results : </p>
             <div className="d-flex justify-content-around align-items-center">
-              <img
-                src={orgImage}
-                className="rounded float-start mb-2"
-                alt="Image"
-                style={{ maxHeight: "300px", maxWidth: "300px" }}
-              ></img>
-              <img
-                src={bbImage}
-                className="rounded float-start my-2"
-                alt="Image"
-                style={{ maxHeight: "300px", maxWidth: "300px" }}
-              ></img>
-              <img
-                src={cpdImage}
-                className="rounded float-start mt-2"
-                alt="Image"
-                style={{ maxHeight: "fit-content", maxWidth: "fit-content" }}
-              ></img>
+              {loadImage ? (
+                <div
+                  className="spinner-border text-primary"
+                  role="status"
+                ></div>
+              ) : (
+                <img
+                  src={orgImage}
+                  className="rounded float-start mb-2"
+                  alt="Image"
+                  style={{ maxHeight: "300px", maxWidth: "300px" }}
+                />
+              )}
+
+              {loadImage ? (
+                <div
+                  className="spinner-border text-primary"
+                  role="status"
+                ></div>
+              ) : (
+                <img
+                  src={bbImage}
+                  className="rounded float-start my-2"
+                  alt="Image"
+                  style={{ maxHeight: "300px", maxWidth: "300px" }}
+                />
+              )}
+              {loadImage ? (
+                <div
+                  className="spinner-border text-primary"
+                  role="status"
+                ></div>
+              ) : (
+                <img
+                  src={cpdImage}
+                  className="rounded float-start mt-2"
+                  alt="Image"
+                  style={{ maxHeight: "fit-content", maxWidth: "fit-content" }}
+                />
+              )}
             </div>
             <div className="d-flex justify-content-center mb-3 mt-4">
               <button
