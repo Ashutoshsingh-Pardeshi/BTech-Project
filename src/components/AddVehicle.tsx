@@ -162,12 +162,9 @@ const AddVehicle = () => {
   };
 
   const occupyParkingSpot = (userId: string, parkingSpot: string) => {
-    // console.log("UserId : ", userId);
-    // console.log("updated parkingSpot: ", parkingSpot);
     axios
       .put(`http://localhost:3000/api/parkings/occupy/${userId}/${parkingSpot}`)
-      .then((res) => {
-        console.log("parking the user vehicle: ", res);
+      .then(() => {
         navigate("/parked-vehicles");
       })
       .catch((err) => console.log(err));

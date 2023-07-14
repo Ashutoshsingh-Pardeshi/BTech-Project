@@ -29,7 +29,6 @@ const PaymentDetails = () => {
           } else {
             setParkingCharge(((duration / 60) * 20).toFixed(2));
           }
-          console.log(res.data);
           console.log(duration.toFixed(2));
           deleteUser();
         }
@@ -41,7 +40,7 @@ const PaymentDetails = () => {
       // .get(`http://localhost:3000/api/owners/${id}`)
       .delete(`http://localhost:3000/api/owners/${id}`)
       .then((res) => {
-        console.log("Removed the user data successfully.");
+        // console.log("Removed the user data successfully.");
         setLicenseNumber(res.data.vehicle.licenseNumber);
       })
       .catch((err) => {
@@ -52,7 +51,7 @@ const PaymentDetails = () => {
       // .get(`http://localhost:3000/api/parkings/checkOut/${id}`)
       .delete(`http://localhost:3000/api/parkings/checkOut/${id}`)
       .then(() => {
-        console.log("Updated the parkingSpot status successfully.");
+        // console.log("Updated the parkingSpot status successfully.");
       })
       .catch((err) => {
         console.log(err);

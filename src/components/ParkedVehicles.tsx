@@ -15,7 +15,6 @@ const ParkedVehicles = () => {
     axios
       .get("http://localhost:3000/api/owners")
       .then((res) => {
-        console.log("user : ", res.data);
         setUsers(res.data);
       })
       .catch((err) => {
@@ -25,7 +24,6 @@ const ParkedVehicles = () => {
     axios
       .get("http://localhost:3000/api/parkings/parkedSpots")
       .then((res) => {
-        console.log("parkings : ", res.data);
         setParkingSpots(res.data);
       })
       .catch((err) => {

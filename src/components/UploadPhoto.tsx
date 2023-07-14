@@ -17,20 +17,10 @@ function UploadPhoto() {
   const handleChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ): Promise<any> => {
-    // const { target } = event;
-    // const img = new Image();
-
-    // const ImageName = event.target.value.split("\\")[2];
-    // const Image = event.target.value;
-    // console.log("Imageon Kevel: ", Image); // Image on Kevel
-    // console.log("ImageName on Kevel: ", ImageName); // ImageName on Kevel
-    // console.log("ImageLink on Kevel: ", event.target.value); // ImageLink on Kevel
-    // console.log("event current Target files: ", event.target.files[0].path);
-
     const fileLoaded = URL.createObjectURL(event.target.files[0]);
     const files = event.target.files;
 
-    console.log("files: ", files);
+    // console.log("files: ", files);
     if (files[0].name == "car1.jpg") {
       setLicenseNumber("WUN 96650");
     } else if (files[0].name == "car2.jpg") {
@@ -41,9 +31,6 @@ function UploadPhoto() {
     const dimensions = await someFunction(fileLoaded);
     setDimensionWidth(dimensions.width);
     setDimensionHeight(dimensions.height);
-    console.log("dimensions: ", dimensions);
-    console.log("dimensions width: ", dimensions.width);
-    console.log("dimensions height: ", dimensions.height);
     setFile(fileLoaded);
   };
 
@@ -60,14 +47,9 @@ function UploadPhoto() {
     });
   // Get dimensions
   const someFunction = async (file: any) => {
-    console.log("file: ", file);
     const dimensions = await getHeightAndWidthFromDataUrl(file);
     return dimensions;
   };
-
-  // const handleImages = (licenseNumber: string) => {
-  //   console.log("licenseNumber: ", licenseNumber);
-  // };
 
   const handleANPR = () => {
     setOrgImage("/src/assets/images/" + licenseNumber + "-org.jpg");

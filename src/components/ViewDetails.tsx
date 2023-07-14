@@ -17,7 +17,6 @@ const ViewDetails = () => {
     axios
       .get(`http://localhost:3000/api/owners/${id}`)
       .then((res) => {
-        console.log("owner: ", res.data);
         setUser(res.data);
       })
       .catch((err) => {
@@ -27,7 +26,6 @@ const ViewDetails = () => {
     axios
       .get(`http://localhost:3000/api/parkings/${id}`)
       .then((res) => {
-        console.log("parking: ", res.data);
         setParking(res.data);
       })
       .catch((err) => {
@@ -61,7 +59,8 @@ const ViewDetails = () => {
                 style={{ maxHeight: "300px", maxWidth: "300px" }}
               ></img>
               <img
-                src={ // "/src/assets/images/MHOTAV8866-bb.jpg"
+                src={
+                  // "/src/assets/images/MHOTAV8866-bb.jpg"
                   "/src/assets/images/" +
                   user?.vehicle.licenseNumber +
                   "-bb.jpg"
@@ -71,7 +70,8 @@ const ViewDetails = () => {
                 style={{ maxHeight: "300px", maxWidth: "300px" }}
               ></img>
               <img
-                src={ // "/src/assets/images/MHOTAV8866-cpd.jpg"
+                src={
+                  // "/src/assets/images/MHOTAV8866-cpd.jpg"
                   "/src/assets/images/" +
                   user?.vehicle.licenseNumber +
                   "-cpd.jpg"
@@ -184,6 +184,22 @@ const ViewDetails = () => {
                     </div>
                     <div className="col-3">
                       <p className="h6">{user && user.vehicle.chasisNumber}</p>
+                    </div>
+
+                    <div className="col-3">
+                      <p className="h6">Color : </p>
+                    </div>
+                    <div className="col-3">
+                      <p className="h6">{user && user.vehicle.color} </p>
+                    </div>
+
+                    <div className="col-3">
+                      <p className="h6">Seating Capacity : </p>
+                    </div>
+                    <div className="col-3">
+                      <p className="h6">
+                        {user && user.vehicle.seatingCapacity.toString()}
+                      </p>
                     </div>
                   </div>
                 </div>

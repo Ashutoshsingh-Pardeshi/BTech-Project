@@ -23,7 +23,6 @@ const Home = () => {
     axios
       .get("http://localhost:3000/api/parkings/availableSpots")
       .then((res) => {
-        console.log(res.data);
         setParkingSpots(res.data);
       })
       .catch((err) => console.log(err));
