@@ -91,7 +91,18 @@ const ParkedVehicles = () => {
                 users.map((vehicle) => (
                   <tr key={vehicle._id + "12345"}>
                     <th scope="row">{vehicle._id.substring(18)}</th>
-                    <td>vehicle.image</td>
+                    <td>
+                      <img
+                        src={
+                          "/src/assets/images/" +
+                          vehicle.vehicle.licenseNumber +
+                          "-org.jpg"
+                        }
+                        className="rounded float-start mb-2"
+                        alt="Image"
+                        style={{ maxHeight: "75px", maxWidth: "75px" }}
+                      />
+                    </td>
                     <td>{vehicle.vehicle.licenseNumber}</td>
                     <td>
                       {new Date(getCheckIn(vehicle._id)).toLocaleTimeString(
