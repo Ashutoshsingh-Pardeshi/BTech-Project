@@ -36,8 +36,8 @@ const PaymentDetails = () => {
       .catch((err) => console.log(err));
 
     axios
-      .get(`http://localhost:3000/api/owners/${id}`)
-      // .delete(`http://localhost:3000/api/owners/${id}`)
+      // .get(`http://localhost:3000/api/owners/${id}`)
+      .delete(`http://localhost:3000/api/owners/${id}`)
       .then((res) => {
         console.log("Removed the user data successfully.");
         setLicenseNumber(res.data.vehicle.licenseNumber);
@@ -47,8 +47,8 @@ const PaymentDetails = () => {
       });
 
     axios
-      .get(`http://localhost:3000/api/parkings/checkOut/${id}`)
-      // .delete(`http://localhost:3000/api/parkings/checkOut/${id}`)
+      // .get(`http://localhost:3000/api/parkings/checkOut/${id}`)
+      .delete(`http://localhost:3000/api/parkings/checkOut/${id}`)
       .then(() => {
         console.log("Updated the parkingSpot status successfully.");
       })
