@@ -31,10 +31,12 @@ const PaymentDetails = () => {
           }
           console.log(res.data);
           console.log(duration.toFixed(2));
+          deleteUser();
         }
       })
       .catch((err) => console.log(err));
-
+  }, []);
+  const deleteUser = () => {
     axios
       // .get(`http://localhost:3000/api/owners/${id}`)
       .delete(`http://localhost:3000/api/owners/${id}`)
@@ -55,7 +57,7 @@ const PaymentDetails = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  };
 
   return (
     <>
