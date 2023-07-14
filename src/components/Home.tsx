@@ -68,7 +68,7 @@ const Home = () => {
                     : "danger")
                 }
                 onClick={() => {
-                  navigate("/add-vehicle");
+                  navigate("/upload-image");
                 }}
               >
                 <span className="display-6 p-5">

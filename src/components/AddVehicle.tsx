@@ -4,7 +4,7 @@ import { FieldErrors, FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import preloadedData from "../assets/common/PrefilledData";
 
 const FormSchema = z.object({
@@ -55,12 +55,10 @@ const FormSchema = z.object({
     })
     .min(10, { message: "Please enter the valid number." }),
 
-  licenseNumber: z
-    .string({
-      required_error: "The license number of the vehicle cannot be empty.",
-      invalid_type_error: "Please enter a valid license number.",
-    })
-    .min(10, { message: "Please enter the valid license number." }),
+  licenseNumber: z.string({
+    required_error: "The license number of the vehicle cannot be empty.",
+    invalid_type_error: "Please enter a valid license number.",
+  }),
 
   registrationDate: z.date({
     required_error: "The registration date of the user cannot be empty.",
@@ -86,6 +84,7 @@ export type FormData = z.infer<typeof FormSchema>;
 
 const AddVehicle = () => {
   const navigate = useNavigate();
+  const { licenseNumber } = useParams();
 
   const {
     register,
@@ -94,6 +93,7 @@ const AddVehicle = () => {
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(FormSchema),
+    defaultValues: { licenseNumber: licenseNumber },
   });
 
   const onPreFill = () => {
@@ -355,6 +355,7 @@ const AddVehicle = () => {
                   type="text"
                   id="licenseNumber"
                   className="form-control"
+                  disabled
                 />
               </div>
 

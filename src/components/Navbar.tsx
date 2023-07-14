@@ -36,7 +36,7 @@ const Navbar = () => {
             <Link className="nav-link" to="/parked-vehicles">
               View All
             </Link>
-            <Link className="nav-link" to="/add-vehicle">
+            <Link className="nav-link" to="/upload-image">
               Add New Entry
             </Link>
             <Link className="nav-link" to="/">
